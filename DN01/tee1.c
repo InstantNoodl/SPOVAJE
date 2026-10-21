@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
     char buffer[4096];
     ssize_t bytes_read;
     int file_fd;
-    if(argv[1][0] == '-' && argv[1][1] == 'a'){ 
+    if(argc > 1 && argv[1][0] == '-' && argv[1][1] == 'a' && argv[1][2] == '\0'){ 
     file_fd = open(argv[2], O_WRONLY | O_CREAT | O_APPEND, 0644);
     }
     else{
