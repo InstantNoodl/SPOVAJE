@@ -7,9 +7,18 @@ int main(int argc, char *argv[]) {
    ssize_t bytes_read;
    int file_fd;
    int n=5;
+   if(argc == 3 || argc >4) {
+        write(STDERR_FILENO, "napačni argumenti\n", 20);
+        return 1;
+    }
    if(argc > 1 && argv[1][0] == '-' && argv[1][1] == 'n' && argv[1][2] == '\0'){
-    
+
     n=atoi(argv[2]);
+    
+    if(n<0){
+        write(STDERR_FILENO, "npiši pozitivno število\n", 25);
+        return 1;
+    }
     file_fd = open(argv[3], O_RDONLY, 0644);
 
    }else{
