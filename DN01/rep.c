@@ -34,16 +34,23 @@ int main(int argc, char *argv[]) {
     
     while ((bytes_read = read(file_fd, &ch, 1)) == 1) {
         lseek(file_fd, -sizeof(char)*i, SEEK_END);
+        if(lseek(file_fd, -sizeof(char)*i, SEEK_END) == 0){
+            lseek(file_fd, -sizeof(char)*(i), SEEK_END);
+           break;
+        }
+        
         i++;
        
         if (ch == '\n') {
          count++;
         }
         if (count == n) {
+            lseek(file_fd, -sizeof(char)*(i-3), SEEK_END);
             break;
+            
         }
     }
-    lseek(file_fd, -sizeof(char)*(i-3), SEEK_END);
+    
     while ((bytes_read = read(file_fd, &ch, 1)) == 1) {
          if (write(STDOUT_FILENO, &ch, 1) == -1) {
             perror("write");
