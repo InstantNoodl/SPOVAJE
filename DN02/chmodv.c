@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
     }
 
     if (parse_octal_mode(argv[1], &new_mode)) {
-        /* Numeric modes replace all permission and special bits. */
+/
     } else {
         new_mode = file_info.st_mode & 07777;
 
