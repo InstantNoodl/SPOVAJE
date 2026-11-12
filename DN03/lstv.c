@@ -85,9 +85,10 @@ int main(int argc, char **argv)
 
     qsort(entries, i, sizeof(*entries), compare_entries);
     for (size_t j = 0; j < i; j++) {
-        puts(entries[j].name);
+        printf("%s ", entries[j].name);
         free(entries[j].name);
     }
+    printf("\n");
     free(entries);
     return 0;
 }
