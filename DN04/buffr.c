@@ -51,7 +51,7 @@ int main(int argc, char **argv)
         return 1;
     }
     for (size_t i = 0; i < count; i++) {
-        if (fprintf(file, "Program zapisuje stavek v datoteko.\n") < 0) {
+        if (fprintf(file, "stavek za v datoteko.\n") < 0) {
             perror("fprintf");
             fclose(file);
             return 1;
@@ -71,7 +71,10 @@ int main(int argc, char **argv)
         perror("fclose");
         return 1;
     }
-
+    if (remove("izhod.txt") != 0) {
+        perror("remove");
+        return 1;
+    }
     printf("B = %zu, N = %zu, cas = %.6f s\n", buffer_size, count,
            (double)(end.tv_sec - start.tv_sec) +
            (double)(end.tv_nsec - start.tv_nsec) / 1000000000.0);

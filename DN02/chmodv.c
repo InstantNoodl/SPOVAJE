@@ -5,7 +5,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-static void format_permissions(mode_t mode, char permissions[10])
+void format_permissions(mode_t mode, char permissions[10])
 {
     permissions[0] = (mode & S_IRUSR) ? 'r' : '-';
     permissions[1] = (mode & S_IWUSR) ? 'w' : '-';
@@ -24,8 +24,7 @@ static void format_permissions(mode_t mode, char permissions[10])
         : ((mode & S_IXOTH) ? 'x' : '-');
     permissions[9] = '\0';
 }
-
-static int parse_octal_mode(const char *text, mode_t *mode)
+int parse_octal_mode(const char *text, mode_t *mode)
 {
     const char *digit;
     char *end;
@@ -55,7 +54,7 @@ int main(int argc, char *argv[])
     char permissions[10];
 
     if (argc != 3) {
-        fprintf(stderr, "Uporaba: %s <dovoljenja> <datoteka>\n", argv[0]);
+        printf("napačno število argumentov\n");
         return 1;
     }
 
@@ -65,7 +64,6 @@ int main(int argc, char *argv[])
     }
 
     if (parse_octal_mode(argv[1], &new_mode)) {
-/
     } else {
         new_mode = file_info.st_mode & 07777;
 
@@ -84,6 +82,7 @@ int main(int argc, char *argv[])
         } else {
             fprintf(stderr, "Neveljavna dovoljenja: %s\n", argv[1]);
             return 1;
+            
         }
     }
 
